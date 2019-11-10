@@ -31,12 +31,21 @@ app.get("/findBoba", async (req, res) => {
         Math.floor(Math.random() * result.jsonBody.businesses.length)
       ];
 
-    console.log(boba_shop);
+    var boba_shop_data = {
+      name: boba_shop.name,
+      rating: boba_shop.price,
+      price: boba_shop.price, // given in meters
+      distance: boba_shop.distance,
+      address: boba_shop.address1,
+      phone: boba_shop.phone,
+      picture: boba_shop.picture
+    };
+    var boba_shop_JSON = JSON.stringify(boba_shop_data);
 
     res.status(200).json({
       status: "Search: success",
       data: {
-        boba_shop
+        boba_shop_JSON
       }
     });
   } catch (err) {
