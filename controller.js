@@ -1,6 +1,7 @@
 const yelp = require("yelp-fusion");
 const dotenv = require("dotenv");
 const User = require("./userModel");
+const AppError = require("./utils/AppError");
 
 dotenv.config({ path: "./config.env" });
 const client = yelp.client(process.env.API_KEY);
@@ -38,9 +39,7 @@ exports.getBobaShop = async (req, res, next) => {
       yelp: boba_shop.url
     };
 
-    res.status(200).json({
-      boba_shop_data
-    });
+    res.status(200).json({ boba_shop_data });
   } catch (err) {
     res.status(404).json({
       status: "ERROR",
@@ -58,19 +57,22 @@ exports.getMyBobaList = async (req, res, next) => {
 
 exports.postBoba = (req, res, next) => {};
 
-exports.getUser = (req, res, next) => {};
+exports.getUser = async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new AppError("No user found with that ID", 404));
+  }
+
+  res.status(200).json({ user });
+};
 
 exports.createUser = async (req, res, next) => {
   const newUser = await User.create(req.body);
 
   console.log(newUser);
 
-  res.status(201).json({
-    status: "success",
-    data: {
-      user: newUser
-    }
-  });
+  res.status(201).json({ user });
 };
 
 exports.updateUser = async (req, res, next) => {
@@ -78,14 +80,12 @@ exports.updateUser = async (req, res, next) => {
     new: true,
     runValidators: true
   });
-  if (!tour) {
-    return next(new AppError("No tour found with that ID", 404));
+
+  if (!user) {
+    return next(new AppError("No user found with that ID", 404));
   }
 
-  res.status(200).json({
-    status: "success",
-    data: {
-      user
-    }
-  });
+  res.status(200).json({ user });
 };
+
+exports.deleteUser = async (req, res, next) => {};
