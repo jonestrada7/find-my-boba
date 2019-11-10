@@ -1,5 +1,6 @@
 const yelp = require("yelp-fusion");
 const dotenv = require("dotenv");
+
 dotenv.config({ path: "./config.env" });
 const client = yelp.client(process.env.API_KEY);
 
@@ -16,7 +17,8 @@ exports.getBobaShop = async (req, res, next) => {
     const result = await client.search({
       term: "boba",
       longitude: req.query.longitude,
-      latitude: req.query.latitude
+      latitude: req.query.latitude,
+      open: true
     });
 
     var boba_shop =
@@ -28,14 +30,12 @@ exports.getBobaShop = async (req, res, next) => {
       name: boba_shop.name,
       rating: boba_shop.rating,
       price: boba_shop.price, // given in meters
-      distance: boba_shop.distance,
+      distance: (boba_shop.distance * 0.000621371).toFixed(2),
       address: boba_shop.location.address1,
       phone: boba_shop.phone,
       picture: boba_shop.picture,
       yelp: boba_shop.url
     };
-
-    var boba_shop_JSON = JSON.stringify(boba_shop_data); // return
 
     res.status(200).json({
       boba_shop_data
