@@ -28,6 +28,9 @@ exports.getBobaShop = async (req, res, next) => {
         Math.floor(Math.random() * result.jsonBody.businesses.length)
       ];
 
+    const boba_shop_details = await client.business(boba_shop.id);
+    const shop_img = boba_shop_details.image_url;
+
     var boba_shop_data = {
       name: boba_shop.name,
       rating: boba_shop.rating,
@@ -35,7 +38,7 @@ exports.getBobaShop = async (req, res, next) => {
       distance: (boba_shop.distance * 0.000621371).toFixed(2),
       address: boba_shop.location.address1,
       phone: boba_shop.display_phone,
-      picture: boba_shop.picture,
+      picture: shop_img,
       yelp: boba_shop.url
     };
 
@@ -87,5 +90,3 @@ exports.updateUser = async (req, res, next) => {
 
   res.status(200).json({ user });
 };
-
-exports.deleteUser = async (req, res, next) => {};
