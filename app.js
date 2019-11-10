@@ -1,7 +1,11 @@
 const express = require("express");
 const dotenv = require("dotenv");
-
 const app = express();
+const yelp = require("yelp-fusion");
+
+// Environment Variables
+dotenv.config({ path: "./config.env" });
+const client = yelp.client(process.env.API_KEY);
 
 app.use(express.json());
 
