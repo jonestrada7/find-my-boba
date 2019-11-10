@@ -16,13 +16,25 @@ app.get("/", function(req, res) {
   });
 });
 
-app.get("/search", function(req, res) {
+app.get("/findBoba", async (req, res) => {
   // res.render("search");
   console.log("Search page has been activated");
+  try {
+    const result = await client.search({
+      term: "boba",
+      location: "irvine, ca"
+    });
 
-  res.status(200).json({
-    status: "Search: success"
-  });
+    console.log(result.jsonBody.businesses.length); // Returns 20 queries
+
+    res.status(200).json({
+      status: "Search: success"
+    });
+  } catch {
+    res.status(404).json({
+      status: "ERROR"
+    });
+  }
 });
 
 app.get("/mybobalist", function(req, res) {
