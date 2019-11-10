@@ -1,5 +1,5 @@
 const express = require("express");
-const controller = require("./controller");
+const controller = require("./searchController");
 const router = express.Router();
 
 // Search Boba
@@ -15,7 +15,6 @@ router.route("/users").post(controller.createUser);
 router
     .route("/users/:id")
     .get(controller.getUser)
-    .patch(controller.updateUser)
-    .delete(controller.deleteUser);
+    .patch(controller.updateUser);
 
 module.exports = router;
