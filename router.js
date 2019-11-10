@@ -1,12 +1,17 @@
 const express = require("express");
-const searchController = require("./searchController");
+const controller = require("./controller");
 const router = express.Router();
 
-router.route("/").get(searchController.getHome);
-router.route("/findBoba").get(searchController.getBobaShop);
+router.route("/").get(controller.getHome);
+router.route("/findBoba").get(controller.getBobaShop);
 router
   .route("/mybobalist")
-  .get(searchController.getMyBobaList)
-  .post(searchController.postBoba);
+  .get(controller.getMyBobaList)
+  .post(controller.postBoba);
+router
+  .route("/users")
+  .get(controller.getUser)
+  .post(controller.createUser)
+  .patch(controller.updateUser);
 
 module.exports = router;

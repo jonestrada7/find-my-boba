@@ -1,5 +1,6 @@
 const yelp = require("yelp-fusion");
 const dotenv = require("dotenv");
+const User = require("./userModel");
 
 dotenv.config({ path: "./config.env" });
 const client = yelp.client(process.env.API_KEY);
@@ -55,4 +56,36 @@ exports.getMyBobaList = async (req, res, next) => {
   });
 };
 
-exports.postBoba = async (req, ers, next) => {};
+exports.postBoba = (req, res, next) => {};
+
+exports.getUser = (req, res, next) => {};
+
+exports.createUser = async (req, res, next) => {
+  const newUser = await User.create(req.body);
+
+  console.log(newUser);
+
+  res.status(201).json({
+    status: "success",
+    data: {
+      user: newUser
+    }
+  });
+};
+
+exports.updateUser = async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
+  if (!tour) {
+    return next(new AppError("No tour found with that ID", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      user
+    }
+  });
+};

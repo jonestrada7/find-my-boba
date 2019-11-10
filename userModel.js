@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
     minlength: 8
   },
   bobaList: {
-    type: [String]
+    type: [String] // List of unique _id's corresponding to boba shops (provided by Yelp)
   }
 });
 
