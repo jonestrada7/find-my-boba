@@ -34,7 +34,7 @@ exports.getBobaShop = async (req, res, next) => {
       price: boba_shop.price, // given in meters
       distance: (boba_shop.distance * 0.000621371).toFixed(2),
       address: boba_shop.location.address1,
-      phone: boba_shop.phone,
+      phone: boba_shop.display_phone,
       picture: boba_shop.picture,
       yelp: boba_shop.url
     };
