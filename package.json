@@ -1,0 +1,23 @@
+{
+  "name": "mybobalist",
+  "version": "1.0.0",
+  "description": "Personalized boba list (Description TBD)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonestrada7/mybobalist.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonestrada7/mybobalist/issues"
+  },
+  "homepage": "https://github.com/jonestrada7/mybobalist#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
