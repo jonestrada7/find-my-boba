@@ -19,33 +19,43 @@ app.get("/", function(req, res) {
 app.get("/findBoba", async (req, res) => {
   // res.render("search");
   console.log("Search page has been activated");
-  // try {
+   try {
   const result = await client.search({
     term: "boba",
-    location: "irvine, ca"
+    longitude: req.params.longitude, 
+	latitude: req.params.latitude; 
   });
 
-  console.log(result.jsonBody.businesses.length); // Returns 20 queries
   var boba_shop =
     result.jsonBody.businesses[
       Math.floor(Math.random() * result.jsonBody.businesses.length)
     ];
-
-  console.log(boba_shop);
-
+   
+  var boba_shop_data {
+	  name : boba_shop.name,
+	  rating : boba_shop.rating, 
+	  price : boba_shop.price,
+	  distance : boba_shop.distance, // given in meters
+	  address : boba_shop.location.address1, 
+	  phone : boba_shop.display_phone, 
+	  picture : boba_shop.image_url;
+  }
+	var boba_shop_JSON  = JSON.stringify(boba_shop_data); 
+	  
+	   
   res.status(200).json({
     status: "Search: success",
     data: {
       boba_shop
     }
   });
-  // }
-  // catch (err) {
-  //   res.status(404).json({
-  //     status: "ERROR",
-  //     message: err
-  //   });
-  // }
+   }
+   catch (err) {
+     res.status(404).json({
+       status: "ERROR",
+       message: err
+     });
+   }
 });
 
 app.get("/mybobalist", function(req, res) {
