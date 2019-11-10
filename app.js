@@ -1,17 +1,19 @@
 const express = require("express");
+const dotenv = require("dotenv");
+
 const app = express();
 
 app.use(express.json());
 
 app.get("/", function(req, res) {
-  res.render("home");
+  // res.render("home");
   res.status(200).json({
     status: "Home: success"
   });
 });
 
 app.get("/search", function(req, res) {
-  res.render("search");
+  // res.render("search");
   console.log("Search page has been activated");
 
   res.status(200).json({
@@ -20,7 +22,7 @@ app.get("/search", function(req, res) {
 });
 
 app.get("/mybobalist", function(req, res) {
-  res.render("bobalist");
+  // res.render("bobalist");
   console.log("Bobalist page has been activated");
 
   res.status(200).json({
