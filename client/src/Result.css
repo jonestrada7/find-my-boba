@@ -1,0 +1,62 @@
+.ShopName{
+    font-size: 35px;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ShopImage{
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ShopInfo{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 55%;
+
+}
+
+.ShopRating_ShopPrice{
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ShopDetails{
+    height: 70vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.BobaRate, .BobaPrice{
+    width: 35px;
+    height: 35px;
+}
+
+.BobaRates, .BobaPrices{
+    width: 50%;
+    margin: 20px;
+}
+
+.BobaRate{
+    float: right;
+}
+
+.ShopDistance_TMT{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.Center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
