@@ -19,22 +19,33 @@ app.get("/", function(req, res) {
 app.get("/findBoba", async (req, res) => {
   // res.render("search");
   console.log("Search page has been activated");
-  try {
-    const result = await client.search({
-      term: "boba",
-      location: "irvine, ca"
-    });
+  // try {
+  const result = await client.search({
+    term: "boba",
+    location: "irvine, ca"
+  });
 
-    console.log(result.jsonBody.businesses.length); // Returns 20 queries
+  console.log(result.jsonBody.businesses.length); // Returns 20 queries
+  var boba_shop =
+    result.jsonBody.businesses[
+      Math.floor(Math.random() * result.jsonBody.businesses.length)
+    ];
 
-    res.status(200).json({
-      status: "Search: success"
-    });
-  } catch {
-    res.status(404).json({
-      status: "ERROR"
-    });
-  }
+  console.log(boba_shop);
+
+  res.status(200).json({
+    status: "Search: success",
+    data: {
+      boba_shop
+    }
+  });
+  // }
+  // catch (err) {
+  //   res.status(404).json({
+  //     status: "ERROR",
+  //     message: err
+  //   });
+  // }
 });
 
 app.get("/mybobalist", function(req, res) {
