@@ -1,5 +1,5 @@
 const express = require("express");
-const controller = require("./searchController");
+const controller = require("./controller");
 const router = express.Router();
 
 // Search Boba
