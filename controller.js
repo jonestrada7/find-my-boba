@@ -29,7 +29,7 @@ exports.getBobaShop = async (req, res, next) => {
       ];
 
     const boba_shop_details = await client.business(boba_shop.id);
-    const shop_img = boba_shop_details.image_url;
+    const shop_img = boba_shop_details.jsonBody.image_url;
 
     var boba_shop_data = {
       name: boba_shop.name,
@@ -57,8 +57,6 @@ exports.getMyBobaList = async (req, res, next) => {
     status: "My page: success"
   });
 };
-
-exports.postBoba = (req, res, next) => {};
 
 exports.getUser = async (req, res, next) => {
   const user = await User.findById(req.params.id);
@@ -90,3 +88,15 @@ exports.updateUser = async (req, res, next) => {
 
   res.status(200).json({ user });
 };
+
+// exports.login = async (req, res, next) => {
+//   if (req.body.email && req.body.password) {
+//     console.log(req.body.email);
+//     const user = await User.findById(req.body.email);
+//     console.log(user);
+
+//     // res.status(201).json({
+//     //   status: "Valid password: success"
+//     // });
+//   }
+// };
