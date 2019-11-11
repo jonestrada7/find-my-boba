@@ -2,15 +2,15 @@ const yelp = require("yelp-fusion");
 const dotenv = require("dotenv");
 const User = require("./userModel");
 const AppError = require("./utils/AppError");
+var path = require("path");
 
 dotenv.config({ path: "./config.env" });
 const client = yelp.client(process.env.API_KEY);
 
 exports.getHome = async (req, res, next) => {
-  console.log("Home page: activated!");
-  res.status(200).json({
-    status: "Home page: success"
-  });
+  res.sendFile(
+    path.join(__dirname, "./My-Boba-List-Frontend/build/index.html")
+  );
 };
 
 exports.getBobaShop = async (req, res, next) => {
