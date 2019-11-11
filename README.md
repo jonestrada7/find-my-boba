@@ -1,2 +1,2 @@
 # find-my-boba
-Personalized boba list (Description TBD)
+Random boba shop generator
