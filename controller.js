@@ -8,7 +8,7 @@ dotenv.config({ path: "./config.env" });
 const client = yelp.client(process.env.API_KEY);
 
 exports.getHome = async (req, res, next) => {
-  res.sendFile(path.join(__dirname, './client/build/index.html'));
+  res.sendFile(path.join(__dirname, './My-Boba-List-Frontend/build/index.html'));
 };
 
 exports.getBobaShop = async (req, res, next) => {
@@ -27,7 +27,7 @@ exports.getBobaShop = async (req, res, next) => {
             ];
 
     const boba_shop_details = await client.business(boba_shop.id);
-    const shop_img = boba_shop_details.image_url;
+    const shop_img = boba_shop_details.jsonBody.image_url;
 
     var boba_shop_data = {
       name: boba_shop.name,

@@ -15,7 +15,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use("/", router);
-app.use(express.static(path.join(__dirname, './client/build')));
+app.use(express.static(path.join(__dirname, './My-Boba-List-Frontend/build')));
 
 // MONGODB STUFF
 const DB = process.env.DATABASE.replace(
