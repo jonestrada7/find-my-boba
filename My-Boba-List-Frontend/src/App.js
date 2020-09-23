@@ -3,6 +3,7 @@ import './App.css';
 import Loading from './Loading.js';
 import Result from './Result.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class App extends React.Component {
     this.state = {loading: true, data: {}};
   }
 
+  // Function called when user clicks on "Find Me Boba!"
   onBobaFindClick = () => {
     this.setState({
       loading: true,
@@ -19,17 +21,20 @@ class App extends React.Component {
     let oldThis = this;
 
     if (navigator.geolocation) {
+
+      // User must allow their location to be shared 
+      // FIXME: App should fetch current location of user automatically
       navigator.geolocation.getCurrentPosition((position) => {
-        fetch(`/findBoba?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`, {
-          method: 'get' // *GET, POST, PUT, DELETE, etc.
-        }).then(function(response) {
-          return response.json();
-        }).then(function(data) {
-          console.log(data);
-          console.log(data.boba_shop_data);
+        axios.get(`/findBoba?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`).
+          then(function(response) {
+            return response;
+        }).then(function(res_data) {
+          console.log(res_data);
+          console.log(res_data.data.boba_shop_data);
+
           oldThis.setState({
             loading: false,
-            data: data.boba_shop_data
+            data: res_data.data.boba_shop_data
           });
         })
       });

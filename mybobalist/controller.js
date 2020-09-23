@@ -7,15 +7,20 @@ var path = require("path");
 dotenv.config({ path: "./config.env" });
 const client = yelp.client(process.env.API_KEY);
 
+
+// WRONG
 exports.getHome = async (req, res, next) => {
-  res.sendFile(
-    path.join(__dirname, "./My-Boba-List-Frontend/build/index.html")
-  );
+  res.send("Hello World!");
+  // res.sendFile(
+  //   path.join(__dirname, "./My-Boba-List-Frontend/build/index.html")
+  // );
 };
 
 exports.getBobaShop = async (req, res, next) => {
   try {
     console.log("Search Page: activated!");
+
+    // Making a boba shop request to the Yelp Fusion API 
     const result = await client.search({
       term: "boba",
       longitude: req.query.longitude,
@@ -23,11 +28,13 @@ exports.getBobaShop = async (req, res, next) => {
       open: true
     });
 
+    // Retrieving a random boba shop from the first page
     var boba_shop =
       result.jsonBody.businesses[
         Math.floor(Math.random() * result.jsonBody.businesses.length)
       ];
 
+    // Retrieving details and picture of boba shop
     const boba_shop_details = await client.business(boba_shop.id);
     const shop_img = boba_shop_details.jsonBody.image_url;
 
@@ -50,6 +57,8 @@ exports.getBobaShop = async (req, res, next) => {
     });
   }
 };
+
+// FIXME: To implement
 
 exports.getMyBobaList = async (req, res, next) => {
   console.log("Bobalist page has been activated");
